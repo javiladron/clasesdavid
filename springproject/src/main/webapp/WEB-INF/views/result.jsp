@@ -47,7 +47,7 @@
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<h1>Resultado</h1>
-        		<p class="lead">El resultado de la operacion OPERACION para los operandos OPERANDO1 y OPERANDO2 es: <strong>RESULTADO</strong></p>
+        		<p class="lead">El resultado de la operacion es: <strong>${resultado }</strong></p>
 			</div>
 		</div>
 		

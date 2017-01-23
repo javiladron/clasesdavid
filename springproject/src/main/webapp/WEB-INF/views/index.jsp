@@ -52,7 +52,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
-				<form action="" method="GET">
+				<form action="${pageContext.request.contextPath }/operation/calcular/" method="POST">
 		      		<p><strong>Primer operador: </strong><input type="text" name="primerop" value="" class="form-control operador" /></p>
 		      		<p><strong>Segundo operador: </strong><input type="text" name="segundoop" value="" class="form-control operador" /></p>
 		      		<p><select name="operacion" class="form-control operador">
