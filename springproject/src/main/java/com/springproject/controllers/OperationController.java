@@ -2,6 +2,7 @@ package com.springproject.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +31,11 @@ public class OperationController {
 		//llamar a metodo calcular del manager
 		String res=manager.calcular(primerop, segundoop, operacion);
 		//incrustar resultado en el modelo
+		/**
+		 * metemos el resultado calculado en la variable model que se pasa a la vista.
+		 * En este caso la vista es result (result.jsp)
+		 */
+		//model.addAttribute("resultado", StringUtils.isNotBlank(res) ? res : "error");
 		model.addAttribute("resultado", res);
 		return "result";
 	}

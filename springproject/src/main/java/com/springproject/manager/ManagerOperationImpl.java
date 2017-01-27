@@ -3,10 +3,20 @@ package com.springproject.manager;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
+
+/**
+ * El service es  el que habilita el poder ser inyectada 
+ * esta clase en cualquiera de las otras
+ * @author david
+ *
+ */
 @Service
 public class ManagerOperationImpl implements IManagerOperation{
+
 	
-	@Override
+	
+	
+	
 	public String calcular(String po, String so, String op) {
 		if(StringUtils.isNotBlank(po) && StringUtils.isNotBlank(so) && !"-1".equals(op)){
 			boolean isDataInteger=true;
@@ -21,7 +31,6 @@ public class ManagerOperationImpl implements IManagerOperation{
 				isDataInteger=false;
 			}
 			if(isDataInteger){
-				System.out.println("Operacion: "+op+" primer op: "+po+" segundo op: "+so);
 				String res=null;
 				switch (opN) {
 					case 1:
@@ -34,8 +43,12 @@ public class ManagerOperationImpl implements IManagerOperation{
 						res=String.valueOf(poN*soN);
 						break;
 					case 4:
-						double d=poN/soN;
-						res=String.valueOf(d);
+						try{
+							double d=poN/soN;
+							res=String.valueOf(d);
+						}catch(ArithmeticException ae){
+							res=null;
+						}
 						break;
 					default:
 						break;
@@ -46,6 +59,8 @@ public class ManagerOperationImpl implements IManagerOperation{
 		}
 		return null;
 	}
+	
+	
 
 	
 
