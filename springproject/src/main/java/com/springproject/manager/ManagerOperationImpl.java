@@ -16,7 +16,7 @@ public class ManagerOperationImpl implements IManagerOperation{
 	
 	
 	
-	
+	@Override
 	public String calcular(String po, String so, String op) {
 		if(StringUtils.isNotBlank(po) && StringUtils.isNotBlank(so) && !"-1".equals(op)){
 			boolean isDataInteger=true;
