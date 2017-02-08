@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -52,7 +58,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
-				<form action="${pageContext.request.contextPath }/operation/calcular/" method="POST">
+				<%-- <form action="${pageContext.request.contextPath }/operation/calcular/" method="POST">
 		      		<p><strong>Primer operador: </strong><input type="text" name="primerop" value="" class="form-control operador" /></p>
 		      		<p><strong>Segundo operador: </strong><input type="text" name="segundoop" value="" class="form-control operador" /></p>
 		      		<p><select name="operacion" class="form-control operador">
@@ -63,7 +69,22 @@
 		      			<option value="4">Dividir</option>
 		      		</select></p>
 		      		<p><input type="submit" class="btn btn-success" name="boton" value="Calcular" /></p>
-      			</form>
+      			</form> --%>
+      			
+      			<form:form modelAttribute="calculatorObject" method="POST" action="${pageContext.request.contextPath }/operation/calcular/">
+      				<p><strong>Primer operador: </strong><form:input path="primerop" type="text" class="form-control operador"  /></p>
+		      		<p><strong>Segundo operador: </strong><form:input path="segundoop" type="text" class="form-control operador"  /></p>
+      				<p><form:select path="operacion" class="form-control operador">
+      					<form:option value="-1">Elige operación</form:option>
+      					<form:option value="1">Sumar</form:option>
+      					<form:option value="2">Restar</form:option>
+      					<form:option value="3">Multiplicar</form:option>
+      					<form:option value="4">Dividir</form:option>
+      				</form:select></p>
+      				<p><form:input path="boton" type="submit" class="btn btn-success" value="Calcular"/></p>
+      			</form:form>
+      			
+      			
 			</div>
 		</div>
     </div><!-- /.container -->

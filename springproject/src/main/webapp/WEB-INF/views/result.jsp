@@ -48,11 +48,12 @@
 			<div class="col-md-6 col-md-offset-3">
 				<h1>Resultado</h1>
         		<p class="lead">
-        			<c:choose><!-- es el que me habilita meter codio java en vista -->
-        				<c:when test="${empty(resultado)}"><!-- if -->
-        					<font color="red">Se ha producido un error en la introduccion de parametros</font> <a href="${pageContext.request.contextPath }/operation/">Volver</a>
+        			<c:choose><%-- es el que me habilita meter codio java en vista --%>
+        				<c:when test="${empty(resultado)}"><%-- if --%>
+        					<font color="red">ERROR: ${err }</font> <a href="${pageContext.request.contextPath }/operation/">Volver</a>
+        					
         				</c:when>
-        				<c:otherwise><!-- else -->
+        				<c:otherwise><%-- else --%>
         					El resultado de la operacion es: <strong>${resultado }</strong>
         				</c:otherwise>
         			</c:choose>
