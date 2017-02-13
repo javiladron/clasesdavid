@@ -7,6 +7,11 @@ import org.springframework.validation.Validator;
 
 import com.springproject.beans.form.CalculatorObject;
 
+/**
+ * Definimos validador como un bean de spring. para ello usamos la anotacion component (tb podriamos haber usado la anotacion service)
+ * @author david
+ *
+ */
 @Component
 public class CalculatorValidator implements Validator{
 
@@ -35,9 +40,7 @@ public class CalculatorValidator implements Validator{
 			errors.reject("error", "Todos los atributos del formulario son obligatorios");
 		}
 		
-		
-		
-		
+
 	}
 
 }

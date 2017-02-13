@@ -11,7 +11,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({ "com.springproject.controllers com.springproject.manager com.springproject.beans.validator" })
+@ComponentScan({ "com.springproject.controllers com.springproject.manager com.springproject.beans.validator com.springproject.dao" })
 
 public class SpringWebConfig extends WebMvcConfigurerAdapter{
 	@Override

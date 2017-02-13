@@ -1,5 +1,6 @@
 package com.springproject.controllers;
 
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,14 @@ public class OperationController {
 		}
 		else{//si tiene errores cojo la lista de ellos y estraigo únicamente el primero porque se que solo va a haber uno
 			model.addAttribute("resultado", null);
+//			List<ObjectError> listaErrores=br.getAllErrors();
+//			for(int i=0;i<listaErrores.size();i++){
+//				listaErrores.get(i);
+//			}
+//			
+//			for(ObjectError error : listaErrores){
+//				System.out.println(error);
+//			}
 			model.addAttribute("err", br.getAllErrors().get(0).getDefaultMessage());//paso a la vista el unico error que tengo
 		}
 		
@@ -58,6 +67,13 @@ public class OperationController {
 		return "result";
 	}
 	
+	@RequestMapping(value="/operation/showlogs/",method = RequestMethod.GET)
+	public String showlogo(Model model){
+		
+		return null;
+	
+	}
+		
 	
 	
 }
