@@ -42,8 +42,9 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="${pageContext.request.contextPath }/operation/">Operation</a></li>
+            <li><a href="${pageContext.request.contextPath }/operation/">Operation</a></li>
             <li><a href="#">Result</a></li>
+            <li class="active"><a href="${pageContext.request.contextPath }/operation/logs/">Logs</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -65,9 +66,11 @@
 				      </tr>
 				    </thead>
 				    <tbody>
+				    <c:forEach var="coaux" items="${lista }"> 
 				      <tr>
-				        <td>John</td>
+				      		<td>Operacion ${coaux.operacion } -> ${coaux.primerop } | ${coaux.segundoop } </td>
 				      </tr>
+				    </c:forEach>
 				      
 				    </tbody>
 				 </table>

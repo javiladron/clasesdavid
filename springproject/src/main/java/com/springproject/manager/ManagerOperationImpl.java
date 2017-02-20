@@ -1,9 +1,12 @@
 package com.springproject.manager;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.springproject.beans.form.CalculatorObject;
 import com.springproject.dao.IDAOOperation;
 
 
@@ -49,6 +52,12 @@ public class ManagerOperationImpl implements IManagerOperation{
 		}
 		dao.insertOperation(po,so,op);
 		return res;
+	}
+
+
+	@Override
+	public List<CalculatorObject> dameListadoLogs() {
+		return dao.getListadoLog();
 	}
 	
 	

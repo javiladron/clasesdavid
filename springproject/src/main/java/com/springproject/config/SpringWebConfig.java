@@ -1,8 +1,12 @@
 package com.springproject.config;
 
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jndi.JndiTemplate;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -28,4 +32,23 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter{
 		return viewResolver;
 	}
 
+	
+	@Bean
+	public DataSource dataSource() {
+		DataSource dataSource = null;
+        JndiTemplate jndi = new JndiTemplate();
+        try {
+        	dataSource = (DataSource) jndi.lookup("jdbc/springproject");
+        	return dataSource;
+        } catch (NamingException e) {
+        	System.out.println("datasource 1: "+e.getMessage());
+        }
+    	try{
+    		dataSource = (DataSource) jndi.lookup("java:comp/env/jdbc/springproject");
+    		return dataSource;
+    	}catch(Exception ex){
+    		System.out.println("datasource 2: "+ex.getMessage());	
+    	}
+    	return null;
+	}
 }

@@ -1,6 +1,8 @@
 package com.springproject.controllers;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,10 +69,12 @@ public class OperationController {
 		return "result";
 	}
 	
-	@RequestMapping(value="/operation/showlogs/",method = RequestMethod.GET)
+	@RequestMapping(value="/operation/logs/",method = RequestMethod.GET)
 	public String showlogo(Model model){
-		
-		return null;
+//		List<CalculatorObject> lista=manager.dameListadoLogs();
+//		model.addAttribute("lista", lista);
+		model.addAttribute("lista", manager.dameListadoLogs());
+		return "logs";
 	
 	}
 		
