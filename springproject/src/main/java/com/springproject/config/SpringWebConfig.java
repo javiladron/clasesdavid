@@ -6,7 +6,12 @@ import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jndi.JndiTemplate;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -16,7 +21,7 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @ComponentScan({ "com.springproject.controllers com.springproject.manager com.springproject.beans.validator com.springproject.dao" })
-
+@EnableJpaRepositories("com.springproject.dao")
 public class SpringWebConfig extends WebMvcConfigurerAdapter{
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -32,6 +37,28 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter{
 		return viewResolver;
 	}
 
+	
+	
+	@Bean
+	public PersistenceExceptionTranslationPostProcessor persistenceExceptionTranslationPostProcessor(){
+		return new PersistenceExceptionTranslationPostProcessor();
+	}
+	
+	
+	@Bean
+	public JpaTransactionManager jpaTransactionManager(){
+		JpaTransactionManager transactionManager = new JpaTransactionManager(getEntityManagerFactoryBean().getObject());
+		return transactionManager;
+	}
+	
+	@Bean
+	public LocalContainerEntityManagerFactoryBean getEntityManagerFactoryBean() {
+		LocalContainerEntityManagerFactoryBean lcemfb = new LocalContainerEntityManagerFactoryBean();
+		lcemfb.setDataSource(dataSource());
+		lcemfb.setPersistenceUnitName("springproject");
+		lcemfb.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+		return lcemfb;
+	}
 	
 	@Bean
 	public DataSource dataSource() {
@@ -51,4 +78,6 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter{
     	}
     	return null;
 	}
+	
+	
 }
