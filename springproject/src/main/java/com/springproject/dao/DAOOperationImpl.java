@@ -20,7 +20,6 @@ import com.springproject.beans.form.CalculatorObject;
  * Vamos a hacer cuatro implementaciones posibles de esta clase de ejemplo dao
  * 1º Acceso a datos mediante jdbc con configuracion desde codigo
  * 2º Acceso a datos mediante jdbc con configuracion desde servidor de aplicaciones (tomcat)
- * 4º JPA-hibernate desde servidor de aplicaciones (tomcat)
  * @author david
  *
  */

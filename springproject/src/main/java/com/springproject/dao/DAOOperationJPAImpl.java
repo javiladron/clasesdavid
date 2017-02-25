@@ -4,10 +4,13 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.springproject.beans.form.CalculatorObject;
+import com.springproject.beans.bbdd.LogBean;
 
 /**
  * Vamos a hacer cuatro implementaciones posibles de esta clase de ejemplo dao
@@ -27,15 +30,18 @@ public class DAOOperationJPAImpl implements IDAOOperationJPA{
 	private EntityManager em;
 
 	@Override
-	public void insertOperation(CalculatorObject obj) {
-		// TODO Auto-generated method stub
-		
+	@Transactional
+	public void insertOperation(LogBean obj) throws PersistenceException{
+		em.persist(obj);
+		em.flush();
 	}
 
 	@Override
-	public List<CalculatorObject> getListadoLog() {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional
+	public List<LogBean> getListadoLog() throws PersistenceException{
+		String select="select lg from LogBean lg order by lg.fecha desc";
+		Query query = em.createQuery(select);
+		return query.getResultList();
 	}
 
 }

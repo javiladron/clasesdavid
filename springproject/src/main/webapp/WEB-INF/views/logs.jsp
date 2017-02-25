@@ -68,7 +68,8 @@
 				    <tbody>
 				    <c:forEach var="coaux" items="${lista }"> 
 				      <tr>
-				      		<td>Operacion ${coaux.operacion } -> ${coaux.primerop } | ${coaux.segundoop } </td>
+				      		<%-- <td>Operacion ${coaux.operacion } -> ${coaux.primerop } | ${coaux.segundoop } </td> --%>
+				      		<td>Operacion ${coaux.operacion } -> ${coaux.primerop } | ${coaux.segundop } </td>
 				      </tr>
 				    </c:forEach>
 				      

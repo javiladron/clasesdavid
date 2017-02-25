@@ -73,7 +73,8 @@ public class OperationController {
 	public String showlogo(Model model){
 //		List<CalculatorObject> lista=manager.dameListadoLogs();
 //		model.addAttribute("lista", lista);
-		model.addAttribute("lista", manager.dameListadoLogs());
+		//model.addAttribute("lista", manager.dameListadoLogs());
+		model.addAttribute("lista", manager.dameListadoLogsJPA());
 		return "logs";
 	
 	}

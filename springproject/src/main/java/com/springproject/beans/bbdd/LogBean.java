@@ -8,8 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="operationlog")
 public class LogBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -20,7 +22,7 @@ public class LogBean implements Serializable{
 	private Integer id;
 	//@Column(name="primerop")
 	private Integer primerop;
-	private Integer segundoop;
+	private Integer segundop;
 	private String operacion;
 	private Timestamp fecha;
 	
@@ -36,11 +38,11 @@ public class LogBean implements Serializable{
 	public void setPrimerop(Integer primerop) {
 		this.primerop = primerop;
 	}
-	public Integer getSegundoop() {
-		return segundoop;
+	public Integer getSegundop() {
+		return segundop;
 	}
-	public void setSegundoop(Integer segundoop) {
-		this.segundoop = segundoop;
+	public void setSegundop(Integer segundop) {
+		this.segundop = segundop;
 	}
 	public String getOperacion() {
 		return operacion;
@@ -58,7 +60,7 @@ public class LogBean implements Serializable{
 	
 	@Override
 	public String toString() {
-		return id+" "+primerop+" "+segundoop+" "+operacion+" "+fecha;
+		return id+" "+primerop+" "+segundop+" "+operacion+" "+fecha;
 	}
 	
 

@@ -1,13 +1,16 @@
 package com.springproject.manager;
 
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.springproject.beans.bbdd.LogBean;
 import com.springproject.beans.form.CalculatorObject;
 import com.springproject.dao.IDAOOperation;
+import com.springproject.dao.IDAOOperationJPA;
 
 
 /**
@@ -21,6 +24,9 @@ public class ManagerOperationImpl implements IManagerOperation{
 
 	@Autowired
 	IDAOOperation dao;
+	
+	@Autowired
+	IDAOOperationJPA daoJPA;
 	
 	
 	@Override
@@ -50,7 +56,13 @@ public class ManagerOperationImpl implements IManagerOperation{
 			default:
 				break;
 		}
-		dao.insertOperation(po,so,op);
+		//dao.insertOperation(po,so,op);
+		LogBean lb=new LogBean();
+		lb.setPrimerop(Integer.valueOf(po));
+		lb.setSegundop(Integer.valueOf(so));
+		lb.setOperacion(op);
+		lb.setFecha(new Timestamp(System.currentTimeMillis()));
+		daoJPA.insertOperation(lb);
 		return res;
 	}
 
@@ -58,6 +70,12 @@ public class ManagerOperationImpl implements IManagerOperation{
 	@Override
 	public List<CalculatorObject> dameListadoLogs() {
 		return dao.getListadoLog();
+	}
+
+
+	@Override
+	public List<LogBean> dameListadoLogsJPA() {
+		return daoJPA.getListadoLog();
 	}
 	
 	
