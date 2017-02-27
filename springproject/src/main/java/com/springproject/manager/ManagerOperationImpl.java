@@ -11,6 +11,7 @@ import com.springproject.beans.bbdd.LogBean;
 import com.springproject.beans.form.CalculatorObject;
 import com.springproject.dao.IDAOOperation;
 import com.springproject.dao.IDAOOperationJPA;
+import com.springproject.utils.GeneralUtils;
 
 
 /**
@@ -27,6 +28,9 @@ public class ManagerOperationImpl implements IManagerOperation{
 	
 	@Autowired
 	IDAOOperationJPA daoJPA;
+	
+	@Autowired
+	GeneralUtils utils;
 	
 	
 	@Override
@@ -56,7 +60,7 @@ public class ManagerOperationImpl implements IManagerOperation{
 			default:
 				break;
 		}
-		//dao.insertOperation(po,so,op);
+		//dao.insertOperation(po,so,op);//insert por jdbc
 		LogBean lb=new LogBean();
 		lb.setPrimerop(Integer.valueOf(po));
 		lb.setSegundop(Integer.valueOf(so));
@@ -75,7 +79,12 @@ public class ManagerOperationImpl implements IManagerOperation{
 
 	@Override
 	public List<LogBean> dameListadoLogsJPA() {
-		return daoJPA.getListadoLog();
+		List<LogBean> lista=daoJPA.getListadoLog();
+		for(LogBean lb : lista){
+			String operacionString=utils.getOperationByCode(lb.getOperacion());
+			lb.setOperacion(operacionString);
+		}
+		return lista;
 	}
 	
 	

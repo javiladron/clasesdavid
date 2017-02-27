@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.springproject.beans.form.CalculatorObject;
+import com.springproject.utils.GeneralUtils;
 
 /**
  * Vamos a hacer cuatro implementaciones posibles de esta clase de ejemplo dao
@@ -30,6 +31,9 @@ public class DAOOperationImpl implements IDAOOperation{
 	
 	@Autowired
 	private DataSource dataSource;
+	
+	@Autowired
+	private GeneralUtils utils;
 	
 	Connection connection;
 
@@ -52,7 +56,13 @@ public class DAOOperationImpl implements IDAOOperation{
 				connection.commit();
 			}
 		}catch(Exception ex){
-			ex.printStackTrace();
+			try{
+				connection.rollback();//menejo manual de transacciones (un coñazo)
+			}catch(SQLException sqlexcept){
+				sqlexcept.printStackTrace();
+			}
+			
+			
 		}
 		
 		
@@ -65,7 +75,7 @@ public class DAOOperationImpl implements IDAOOperation{
 			checkDriverMySQL();
 			
 			if(connection!=null){
-				PreparedStatement pstmt=connection.prepareStatement("select * from operationlog order by fecha desc");
+				PreparedStatement pstmt=connection.prepareStatement("select * from operationlog order by fecha desc");//SQL
 				ResultSet rs=pstmt.executeQuery();//para select usamos este metodo
 				lista=new ArrayList<CalculatorObject>();
 				while(rs.next()){
@@ -73,7 +83,7 @@ public class DAOOperationImpl implements IDAOOperation{
 					CalculatorObject co=new CalculatorObject();
 					co.setPrimerop(rs.getString(2));//co.setPrimerop(rs.getString("primerop"));
 					co.setSegundoop(rs.getString(3));
-					co.setOperacion(getOperationByCode(rs.getString(4)));
+					co.setOperacion(utils.getOperationByCode(rs.getString(4)));
 					//agregamos a lista
 					lista.add(co);
 				}
@@ -87,26 +97,7 @@ public class DAOOperationImpl implements IDAOOperation{
 		return null;
 	}
 	
-	private String getOperationByCode(String code){
-		String res=null;
-		switch(code){
-			case "1":
-				res="suma";
-				break;
-			case "2":
-				res="resta";
-				break;
-			case "3":
-				res="multiplicacion";
-				break;
-			case "4":
-				res="division";
-				break;
-			default:
-				break;
-		}
-		return res;
-	}
+	
 	
 	private void checkDriverMySQL() throws ClassNotFoundException,SQLException{
 		//Conexion con bbdd metodo 1

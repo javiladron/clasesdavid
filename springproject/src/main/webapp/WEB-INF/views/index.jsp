@@ -82,6 +82,7 @@
       					<form:option value="3">Multiplicar</form:option>
       					<form:option value="4">Dividir</form:option>
       				</form:select></p>
+      				
       				<p><form:input path="boton" type="submit" class="btn btn-success" value="Calcular"/></p>
       			</form:form>
       			

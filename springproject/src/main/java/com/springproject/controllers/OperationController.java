@@ -78,6 +78,14 @@ public class OperationController {
 		return "logs";
 	
 	}
+	
+	/**
+	 * TAREA PARA EL 1/03/2017
+	 * 
+	 * Separar en un manager aparte la implementacion del dao jpa
+	 * 
+	 * 
+	 */
 		
 	
 	

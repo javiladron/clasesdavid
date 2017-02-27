@@ -22,7 +22,7 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@ComponentScan({ "com.springproject.controllers com.springproject.manager com.springproject.beans.validator com.springproject.dao com.springproject.beans.bbdd" })
+@ComponentScan({ "com.springproject.controllers com.springproject.manager com.springproject.beans.validator com.springproject.dao com.springproject.beans.bbdd com.springproject.utils" })
 @EnableJpaRepositories("com.springproject.dao")
 public class SpringWebConfig extends WebMvcConfigurerAdapter{
 	@Override
@@ -39,7 +39,10 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter{
 		return viewResolver;
 	}
 
-	
+	/**
+	 * Los tres siguientes beans los debemos declarar para que la dependencia de spring-data (agregada a nuestro pom)
+	 * pueda inyectarlos internamete. En caso de no hacerlo nos daria un cascotazo
+	 */
 	
 	@Bean
 	public PersistenceExceptionTranslationPostProcessor persistenceExceptionTranslationPostProcessor(){
