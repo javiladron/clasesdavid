@@ -11,6 +11,7 @@ public class CalculatorObject implements Serializable{
 	private String primerop;
 	private String segundoop;
 	private String operacion;
+	private String tipoBBDD;
 	private String boton;
 	public String getPrimerop() {
 		return primerop;
@@ -35,6 +36,12 @@ public class CalculatorObject implements Serializable{
 	}
 	public void setBoton(String boton) {
 		this.boton = boton;
+	}
+	public String getTipoBBDD() {
+		return tipoBBDD;
+	}
+	public void setTipoBBDD(String tipoBBDD) {
+		this.tipoBBDD = tipoBBDD;
 	}
 	
 	

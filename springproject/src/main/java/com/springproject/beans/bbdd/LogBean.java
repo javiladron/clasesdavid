@@ -22,45 +22,110 @@ public class LogBean implements Serializable{
 	private Integer id;
 	//@Column(name="primerop")
 	private Integer primerop;
-	private Integer segundop;
+	@Column(name="segundop")
+	private Integer segundoop;
 	private String operacion;
 	private Timestamp fecha;
 	
+
+
+
+
+
 	public Integer getId() {
 		return id;
 	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
+
+
+
+
+
+
 	public Integer getPrimerop() {
 		return primerop;
 	}
-	public void setPrimerop(Integer primerop) {
-		this.primerop = primerop;
+
+
+
+
+
+
+	public Integer getSegundoop() {
+		return segundoop;
 	}
-	public Integer getSegundop() {
-		return segundop;
-	}
-	public void setSegundop(Integer segundop) {
-		this.segundop = segundop;
-	}
+
+
+
+
+
+
 	public String getOperacion() {
 		return operacion;
 	}
-	public void setOperacion(String operacion) {
-		this.operacion = operacion;
-	}
+
+
+
+
+
+
 	public Timestamp getFecha() {
 		return fecha;
 	}
+
+
+
+
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
+
+
+
+
+	public void setPrimerop(Integer primerop) {
+		this.primerop = primerop;
+	}
+
+
+
+
+
+
+	public void setSegundoop(Integer segundoop) {
+		this.segundoop = segundoop;
+	}
+
+
+
+
+
+
+	public void setOperacion(String operacion) {
+		this.operacion = operacion;
+	}
+
+
+
+
+
+
 	public void setFecha(Timestamp fecha) {
 		this.fecha = fecha;
 	}
-	
-	
+
+
+
+
+
+
+
 	@Override
 	public String toString() {
-		return id+" "+primerop+" "+segundop+" "+operacion+" "+fecha;
+		return id+" "+primerop+" "+segundoop+" "+operacion+" "+fecha;
 	}
 	
 

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.springproject.beans.form.CalculatorObject;
 import com.springproject.beans.validator.CalculatorValidator;
 import com.springproject.manager.IManagerOperation;
+import com.springproject.manager.IManagerOperationJPA;
 
 @Controller
 public class OperationController {
@@ -24,12 +25,16 @@ public class OperationController {
 	IManagerOperation manager;
 	
 	@Autowired
+	IManagerOperationJPA managerJPA;
+	
+	@Autowired
 	CalculatorValidator validator;
 
 	@RequestMapping(value="/operation/",method = RequestMethod.GET)
 	public String showDefaultIndex(Model model){
 		CalculatorObject co= new CalculatorObject();
 		model.addAttribute("calculatorObject",co);
+		model.addAttribute("modologs","jpa");
 		return "index";
 	}
 	
@@ -43,7 +48,17 @@ public class OperationController {
 		if(!br.hasErrors()){//si no tiene errores llamo al manager para que me haga la operacion
 			//llamar a metodo calcular del manager
 			//String res=manager.calcular(primerop, segundoop, operacion);
-			String res=manager.calcular(co.getPrimerop(),co.getSegundoop(),co.getOperacion());
+			String res=null;
+			if("jdbc".equals(co.getTipoBBDD())){
+				res=manager.calcular(co.getPrimerop(),co.getSegundoop(),co.getOperacion());
+				model.addAttribute("modologs","jdbc");
+			}
+			else{
+				res=managerJPA.calcular(co.getPrimerop(),co.getSegundoop(),co.getOperacion());
+				model.addAttribute("modologs","jpa");
+			}
+			
+					
 			//incrustar resultado en el modelo
 			/**
 			 * metemos el resultado calculado en la variable model que se pasa a la vista.
@@ -54,6 +69,7 @@ public class OperationController {
 		}
 		else{//si tiene errores cojo la lista de ellos y estraigo únicamente el primero porque se que solo va a haber uno
 			model.addAttribute("resultado", null);
+			model.addAttribute("modologs","jpa");
 //			List<ObjectError> listaErrores=br.getAllErrors();
 //			for(int i=0;i<listaErrores.size();i++){
 //				listaErrores.get(i);
@@ -70,11 +86,14 @@ public class OperationController {
 	}
 	
 	@RequestMapping(value="/operation/logs/",method = RequestMethod.GET)
-	public String showlogo(Model model){
-//		List<CalculatorObject> lista=manager.dameListadoLogs();
-//		model.addAttribute("lista", lista);
-		//model.addAttribute("lista", manager.dameListadoLogs());
-		model.addAttribute("lista", manager.dameListadoLogsJPA());
+	public String showlogo(HttpServletRequest request,Model model){
+		String mode=request.getParameter("mode");
+		if("jdbc".equals(mode)){
+			model.addAttribute("lista", manager.dameListadoLogs());
+		}
+		else{
+			model.addAttribute("lista", managerJPA.dameListadoLogsJPA());
+		}
 		return "logs";
 	
 	}

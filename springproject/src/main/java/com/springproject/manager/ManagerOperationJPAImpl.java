@@ -21,10 +21,11 @@ import com.springproject.utils.GeneralUtils;
  *
  */
 @Service
-public class ManagerOperationImpl implements IManagerOperation{
+public class ManagerOperationJPAImpl implements IManagerOperationJPA{
 
+	
 	@Autowired
-	IDAOOperation dao;
+	IDAOOperationJPA daoJPA;
 	
 	@Autowired
 	GeneralUtils utils;
@@ -57,16 +58,31 @@ public class ManagerOperationImpl implements IManagerOperation{
 			default:
 				break;
 		}
-		System.out.println("insert log by jdbc");
-		dao.insertOperation(po,so,op);//insert por jdbc
+		//insert por jpa
+		LogBean lb=new LogBean();
+		lb.setPrimerop(Integer.valueOf(po));
+		lb.setSegundoop(Integer.valueOf(so));
+		lb.setOperacion(op);
+		lb.setFecha(new Timestamp(System.currentTimeMillis()));
+		System.out.println("insert log by jpa");
+		daoJPA.insertOperation(lb);
 		return res;
 	}
 
 
+
 	@Override
-	public List<CalculatorObject> dameListadoLogs() {
-		return dao.getListadoLog();
+	public List<LogBean> dameListadoLogsJPA() {
+		List<LogBean> lista=daoJPA.getListadoLog();
+		for(LogBean lb : lista){
+			String operacionString=utils.getOperationByCode(lb.getOperacion());
+			lb.setOperacion(operacionString);
+		}
+		return lista;
 	}
+	
+	
+
 	
 
 }

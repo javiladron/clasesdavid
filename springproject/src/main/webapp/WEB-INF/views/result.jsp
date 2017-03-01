@@ -38,7 +38,7 @@
           <ul class="nav navbar-nav">
             <li><a href="${pageContext.request.contextPath }/operation/">Operation</a></li>
             <li class="active"><a href="#">Result</a></li>
-            <li><a href="${pageContext.request.contextPath }/operation/logs/">Logs</a></li>
+            <li><a href="${pageContext.request.contextPath }/operation/logs/?mode=${modologs}">Logs</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

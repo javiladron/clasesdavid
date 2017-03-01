@@ -44,7 +44,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="${pageContext.request.contextPath }/operation/">Operation</a></li>
             <li><a href="#">Result</a></li>
-            <li><a href="${pageContext.request.contextPath }/operation/logs/">Logs</a></li>
+            <li><a href="${pageContext.request.contextPath }/operation/logs/?mode=${modologs}">Logs</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -82,7 +82,7 @@
       					<form:option value="3">Multiplicar</form:option>
       					<form:option value="4">Dividir</form:option>
       				</form:select></p>
-      				
+      				<p><form:radiobutton path="tipoBBDD" value="jdbc"/>JDBC mode <form:radiobutton path="tipoBBDD" value="jpa" checked="true"/>JPA mode</p>
       				<p><form:input path="boton" type="submit" class="btn btn-success" value="Calcular"/></p>
       			</form:form>
       			
