@@ -72,8 +72,8 @@ public class ManagerOperationJPAImpl implements IManagerOperationJPA{
 
 
 	@Override
-	public List<LogBean> dameListadoLogsJPA() {
-		List<LogBean> lista=daoJPA.getListadoLog();
+	public List<LogBean> dameListadoLogsJPA(String op) {
+		List<LogBean> lista=daoJPA.getListadoLog(op);
 		for(LogBean lb : lista){
 			String operacionString=utils.getOperationByCode(lb.getOperacion());
 			lb.setOperacion(operacionString);

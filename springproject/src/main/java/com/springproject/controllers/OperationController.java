@@ -88,12 +88,14 @@ public class OperationController {
 	@RequestMapping(value="/operation/logs/",method = RequestMethod.GET)
 	public String showlogo(HttpServletRequest request,Model model){
 		String mode=request.getParameter("mode");
+		String op=request.getParameter("op");
 		if("jdbc".equals(mode)){
-			model.addAttribute("lista", manager.dameListadoLogs());
+			model.addAttribute("lista", manager.dameListadoLogs(op));
 		}
 		else{
-			model.addAttribute("lista", managerJPA.dameListadoLogsJPA());
+			model.addAttribute("lista", managerJPA.dameListadoLogsJPA(op));
 		}
+		model.addAttribute("modologs",mode);
 		return "logs";
 	
 	}

@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,12 +39,16 @@ public class DAOOperationJPAImpl implements IDAOOperationJPA{
 
 	@Override
 	@Transactional
-	public List<LogBean> getListadoLog() throws PersistenceException{
-		String select="select lg from LogBean lg order by lg.fecha desc";//JPQL (sentencias SQL sobre clases de persistencia (Entity). NUNCA sobre tablas de bbdd)
+	public List<LogBean> getListadoLog(String op) throws PersistenceException{
+		//JPQL (sentencias SQL sobre clases de persistencia (Entity). NUNCA sobre tablas de bbdd)
+		String select="select lg from LogBean lg order by lg.fecha desc";
+		if(StringUtils.isNotBlank(op)){
+			select="select lg from LogBean lg where lg.operacion = :opeparam order by lg.fecha desc";
+		}
 		Query query = em.createQuery(select);
-//		String select2="select lg from LogBean lg where lg.operacion = :opeparam order by lg.fecha desc";//JPQL con clausula where
-//		Query query2 = em.createQuery(select2);
-//		query2.setParameter("opeparam", "3");
+		if(StringUtils.isNotBlank(op)){
+			query.setParameter("opeparam", op);
+		}
 		return query.getResultList();
 	}
 

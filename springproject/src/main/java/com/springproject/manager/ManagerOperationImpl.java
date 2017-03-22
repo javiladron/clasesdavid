@@ -64,8 +64,8 @@ public class ManagerOperationImpl implements IManagerOperation{
 
 
 	@Override
-	public List<CalculatorObject> dameListadoLogs() {
-		return dao.getListadoLog();
+	public List<CalculatorObject> dameListadoLogs(String op) {
+		return dao.getListadoLog(op);
 	}
 	
 

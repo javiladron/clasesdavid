@@ -8,6 +8,6 @@ public interface IDAOOperation {
 	
 	public void insertOperation(String po, String so, String op);
 	
-	public List<CalculatorObject> getListadoLog();
+	public List<CalculatorObject> getListadoLog(String op);
 
 }

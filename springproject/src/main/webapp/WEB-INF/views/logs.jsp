@@ -59,6 +59,15 @@
 		</div>
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
+				<p><a href="${pageContext.request.contextPath }/operation/logs/?mode=${modologs}&op=1">Logs suma</a></p>
+				<p><a href="${pageContext.request.contextPath }/operation/logs/?mode=${modologs}&op=2">Logs resta</a></p>
+				<p><a href="${pageContext.request.contextPath }/operation/logs/?mode=${modologs}&op=3">Logs multiplicacion</a></p>
+				<p><a href="${pageContext.request.contextPath }/operation/logs/?mode=${modologs}&op=4">Logs division</a></p>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
 				<table class="table table-condensed">
 				    <thead>
 				      <tr>

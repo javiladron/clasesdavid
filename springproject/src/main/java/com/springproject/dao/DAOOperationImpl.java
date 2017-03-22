@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -69,13 +70,20 @@ public class DAOOperationImpl implements IDAOOperation{
 	}
 
 	@Override
-	public List<CalculatorObject> getListadoLog() {
+	public List<CalculatorObject> getListadoLog(String op) {
 		List<CalculatorObject> lista=null;
 		try{
 			checkDriverMySQL();
 			
 			if(connection!=null){
-				PreparedStatement pstmt=connection.prepareStatement("select * from operationlog order by fecha desc");//SQL
+				String query="select * from operationlog order by fecha desc";
+				if(StringUtils.isNotBlank(op)){
+					query="select * from operationlog where operacion = ? order by fecha desc";
+				}
+				PreparedStatement pstmt=connection.prepareStatement(query);//SQL
+				if(StringUtils.isNotBlank(op)){
+					pstmt.setString(1, op);//elegimos setString porque la columna operacion en bbdd es un varchar2. El primer algumento indica la posicion del interrogante que queremos dar valor
+				}
 				ResultSet rs=pstmt.executeQuery();//para select usamos este metodo
 				lista=new ArrayList<CalculatorObject>();
 				while(rs.next()){
