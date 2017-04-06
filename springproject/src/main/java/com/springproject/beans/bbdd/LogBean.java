@@ -5,11 +5,20 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
+/**
+ * Esta entity tiene una relacion 1:N con las entity DescOperationBean
+ * @author david
+ *
+ */
 @Entity
 @Table(name="operationlog")
 public class LogBean implements Serializable{
@@ -24,12 +33,12 @@ public class LogBean implements Serializable{
 	private Integer primerop;
 	@Column(name="segundop")
 	private Integer segundoop;
-	private String operacion;
+	@Column(name="idoperacion")
+	private Integer operacion;
 	private Timestamp fecha;
-	
-
-
-
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="idoperacion",nullable=false,insertable = false, updatable = false)
+	private DescOperationBean descOperation;
 
 
 	public Integer getId() {
@@ -59,7 +68,7 @@ public class LogBean implements Serializable{
 
 
 
-	public String getOperacion() {
+	public Integer getOperacion() {
 		return operacion;
 	}
 
@@ -104,7 +113,7 @@ public class LogBean implements Serializable{
 
 
 
-	public void setOperacion(String operacion) {
+	public void setOperacion(Integer operacion) {
 		this.operacion = operacion;
 	}
 
@@ -117,6 +126,24 @@ public class LogBean implements Serializable{
 		this.fecha = fecha;
 	}
 
+	
+
+
+
+
+
+	public DescOperationBean getDescOperation() {
+		return descOperation;
+	}
+
+
+
+
+
+
+	public void setDescOperation(DescOperationBean descOperation) {
+		this.descOperation = descOperation;
+	}
 
 
 

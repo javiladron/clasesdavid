@@ -13,6 +13,7 @@ public class CalculatorObject implements Serializable{
 	private String operacion;
 	private String tipoBBDD;
 	private String boton;
+	private String color;
 	public String getPrimerop() {
 		return primerop;
 	}
@@ -42,6 +43,12 @@ public class CalculatorObject implements Serializable{
 	}
 	public void setTipoBBDD(String tipoBBDD) {
 		this.tipoBBDD = tipoBBDD;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
 	}
 	
 	

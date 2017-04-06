@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class GeneralUtils {
 	
-	public String getOperationByCode(String code){
+	/*public String getOperationByCode(String code){
 		String res=null;
 		switch(code){
 			case "1":
@@ -24,6 +24,6 @@ public class GeneralUtils {
 				break;
 		}
 		return res;
-	}
+	}*/
 
 }

@@ -33,7 +33,8 @@ public class DAOOperationJPAImpl implements IDAOOperationJPA{
 	@Override
 	@Transactional
 	public void insertOperation(LogBean obj) throws PersistenceException{
-		em.persist(obj);
+		em.persist(obj);//insert
+		//em.merge(obj);//insert or update
 		em.flush();
 	}
 
@@ -41,9 +42,11 @@ public class DAOOperationJPAImpl implements IDAOOperationJPA{
 	@Transactional
 	public List<LogBean> getListadoLog(String op) throws PersistenceException{
 		//JPQL (sentencias SQL sobre clases de persistencia (Entity). NUNCA sobre tablas de bbdd)
-		String select="select lg from LogBean lg order by lg.fecha desc";
+		///String select="select lg from LogBean lg order by lg.fecha desc";
+		String select="select lg,dob from LogBean lg, DescOperationBean dob where lg.descOperation=dob order by lg.fecha desc";
 		if(StringUtils.isNotBlank(op)){
-			select="select lg from LogBean lg where lg.operacion = :opeparam order by lg.fecha desc";
+			//select="select lg from LogBean lg where lg.operacion = :opeparam order by lg.fecha desc";
+			select="select lg,dob from LogBean lg, DescOperationBean dob where lg.descOperation=dob and lg.operacion = :opeparam order by lg.fecha desc";
 		}
 		Query query = em.createQuery(select);
 		if(StringUtils.isNotBlank(op)){

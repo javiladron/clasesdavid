@@ -77,7 +77,15 @@
 				    <tbody>
 				    <c:forEach var="coaux" items="${lista }"> 
 				      <tr>
-				      		<td>Operacion ${coaux.operacion } -> ${coaux.primerop } | ${coaux.segundoop } </td>
+				      		<c:choose>
+				      			<c:when test="${modologs eq 'jpa' }">
+				      				<td><font color="#FFFFFF">Operacion ${coaux.operacion } -> ${coaux.primerop } | ${coaux.segundoop }</font></td>
+				      			</c:when>
+				      			<c:otherwise>
+				      				<td><font color="#${coaux.color }">Operacion ${coaux.operacion } -> ${coaux.primerop } | ${coaux.segundoop }</font></td>
+				      			</c:otherwise>
+				      		</c:choose>
+				      		<%-- <td>Operacion ${coaux.operacion } -> ${coaux.primerop } | ${coaux.segundoop }</td> --%>
 				      </tr>
 				    </c:forEach>
 				      

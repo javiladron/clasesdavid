@@ -27,8 +27,8 @@ public class ManagerOperationJPAImpl implements IManagerOperationJPA{
 	@Autowired
 	IDAOOperationJPA daoJPA;
 	
-	@Autowired
-	GeneralUtils utils;
+	/*@Autowired
+	GeneralUtils utils;*/
 	
 	
 	@Override
@@ -62,7 +62,7 @@ public class ManagerOperationJPAImpl implements IManagerOperationJPA{
 		LogBean lb=new LogBean();
 		lb.setPrimerop(Integer.valueOf(po));
 		lb.setSegundoop(Integer.valueOf(so));
-		lb.setOperacion(op);
+		lb.setOperacion(Integer.parseInt(op));
 		lb.setFecha(new Timestamp(System.currentTimeMillis()));
 		System.out.println("insert log by jpa");
 		daoJPA.insertOperation(lb);
@@ -75,7 +75,8 @@ public class ManagerOperationJPAImpl implements IManagerOperationJPA{
 	public List<LogBean> dameListadoLogsJPA(String op) {
 		List<LogBean> lista=daoJPA.getListadoLog(op);
 		for(LogBean lb : lista){
-			String operacionString=utils.getOperationByCode(lb.getOperacion());
+			//String operacionString=utils.getOperationByCode(lb.getOperacion());
+			Integer operacionString=lb.getOperacion();
 			lb.setOperacion(operacionString);
 		}
 		return lista;
