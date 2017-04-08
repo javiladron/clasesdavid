@@ -40,7 +40,7 @@ public class DAOOperationJPAImpl implements IDAOOperationJPA{
 
 	@Override
 	@Transactional
-	public List<LogBean> getListadoLog(String op) throws PersistenceException{
+	public List<Object[]> getListadoLog(String op) throws PersistenceException{
 		//JPQL (sentencias SQL sobre clases de persistencia (Entity). NUNCA sobre tablas de bbdd)
 		///String select="select lg from LogBean lg order by lg.fecha desc";
 		String select="select lg,dob from LogBean lg, DescOperationBean dob where lg.descOperation=dob order by lg.fecha desc";
@@ -50,7 +50,7 @@ public class DAOOperationJPAImpl implements IDAOOperationJPA{
 		}
 		Query query = em.createQuery(select);
 		if(StringUtils.isNotBlank(op)){
-			query.setParameter("opeparam", op);
+			query.setParameter("opeparam", Integer.valueOf(op));
 		}
 		return query.getResultList();
 	}

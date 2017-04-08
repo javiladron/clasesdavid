@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.springproject.beans.bbdd.DescOperationBean;
 import com.springproject.beans.form.CalculatorObject;
 import com.springproject.beans.validator.CalculatorValidator;
 import com.springproject.manager.IManagerOperation;
@@ -99,15 +100,5 @@ public class OperationController {
 		return "logs";
 	
 	}
-	
-	/**
-	 * TAREA PARA EL 1/03/2017
-	 * 
-	 * Separar en un manager aparte la implementacion del dao jpa
-	 * 
-	 * 
-	 */
-		
-	
 	
 }

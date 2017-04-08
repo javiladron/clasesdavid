@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.springproject.beans.bbdd.DescOperationBean;
 import com.springproject.beans.bbdd.LogBean;
 import com.springproject.beans.form.CalculatorObject;
 import com.springproject.dao.IDAOOperation;
@@ -72,14 +73,8 @@ public class ManagerOperationJPAImpl implements IManagerOperationJPA{
 
 
 	@Override
-	public List<LogBean> dameListadoLogsJPA(String op) {
-		List<LogBean> lista=daoJPA.getListadoLog(op);
-		for(LogBean lb : lista){
-			//String operacionString=utils.getOperationByCode(lb.getOperacion());
-			Integer operacionString=lb.getOperacion();
-			lb.setOperacion(operacionString);
-		}
-		return lista;
+	public List<Object[]> dameListadoLogsJPA(String op) {
+		return daoJPA.getListadoLog(op);
 	}
 	
 	

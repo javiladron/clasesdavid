@@ -8,6 +8,6 @@ public interface IDAOOperationJPA {
 	
 	public void insertOperation(LogBean obj);
 	
-	public List<LogBean> getListadoLog(String op);
+	public List<Object[]> getListadoLog(String op);
 
 }

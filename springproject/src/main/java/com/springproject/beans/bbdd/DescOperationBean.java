@@ -21,9 +21,6 @@ import javax.persistence.Table;
 @Table(name="descoperation")
 public class DescOperationBean implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Id

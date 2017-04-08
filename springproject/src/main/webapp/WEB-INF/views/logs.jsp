@@ -79,7 +79,7 @@
 				      <tr>
 				      		<c:choose>
 				      			<c:when test="${modologs eq 'jpa' }">
-				      				<td><font color="#FFFFFF">Operacion ${coaux.operacion } -> ${coaux.primerop } | ${coaux.segundoop }</font></td>
+				      				<td><font color="#${coaux[1].color }">Operacion ${coaux[1].nombreop } -> ${coaux[0].primerop } | ${coaux[0].segundoop }</font></td>
 				      			</c:when>
 				      			<c:otherwise>
 				      				<td><font color="#${coaux.color }">Operacion ${coaux.operacion } -> ${coaux.primerop } | ${coaux.segundoop }</font></td>
